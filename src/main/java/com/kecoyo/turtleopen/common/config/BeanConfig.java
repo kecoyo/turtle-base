@@ -1,6 +1,7 @@
 package com.kecoyo.turtleopen.common.config;
 
 import com.kecoyo.turtleopen.common.config.bean.JwtProperties;
+import com.kecoyo.turtleopen.common.config.bean.SecurityProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -15,5 +16,11 @@ public class BeanConfig {
     @ConfigurationProperties(prefix = "jwt")
     public JwtProperties jwtProperties() {
         return new JwtProperties();
+    }
+
+    @Bean
+    @ConfigurationProperties(prefix = "jwt2")
+    public SecurityProperties securityProperties() {
+        return new SecurityProperties();
     }
 }

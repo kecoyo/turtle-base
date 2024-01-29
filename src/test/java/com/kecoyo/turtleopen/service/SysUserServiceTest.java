@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class SysUserServiceTest {
 
     @Autowired
-    private IUserService accountService;
+    private UserService accountService;
 
     @Test
     void queryAccount() {

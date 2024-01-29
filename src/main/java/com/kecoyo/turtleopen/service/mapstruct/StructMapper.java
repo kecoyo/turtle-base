@@ -1,6 +1,6 @@
 package com.kecoyo.turtleopen.service.mapstruct;
 
-import com.kecoyo.turtleopen.domain.dto.UserDTO;
+import com.kecoyo.turtleopen.domain.dto.UserDto;
 import com.kecoyo.turtleopen.domain.entity.SysApp;
 import org.mapstruct.Mapper;
 
@@ -14,8 +14,8 @@ public interface StructMapper {
 
     CategoryDTO toCategoryDto(SysApp sysApp);
 
-    SysUser toAccount(UserDTO dto);
+    SysUser toAccount(UserDto dto);
 
-    UserDTO toAccountDto(SysUser sysUser);
+    UserDto toAccountDto(SysUser sysUser);
 
 }
