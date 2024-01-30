@@ -1,7 +1,7 @@
 package com.kecoyo.turtleopen.common.config;
 
-import com.kecoyo.turtleopen.common.config.bean.JwtProperties;
-import com.kecoyo.turtleopen.common.config.bean.SecurityProperties;
+import com.kecoyo.turtleopen.common.security.bean.JwtProperties;
+import com.kecoyo.turtleopen.common.security.bean.SecurityProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

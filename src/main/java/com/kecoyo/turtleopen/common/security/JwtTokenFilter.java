@@ -2,7 +2,7 @@ package com.kecoyo.turtleopen.common.security;
 
 import java.io.IOException;
 
-import com.kecoyo.turtleopen.common.config.bean.JwtProperties;
+import com.kecoyo.turtleopen.common.security.bean.JwtProperties;
 import com.kecoyo.turtleopen.common.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;

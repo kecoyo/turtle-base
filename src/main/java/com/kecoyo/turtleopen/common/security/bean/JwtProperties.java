@@ -1,4 +1,4 @@
-package com.kecoyo.turtleopen.common.config.bean;
+package com.kecoyo.turtleopen.common.security.bean;
 
 import lombok.Data;
 

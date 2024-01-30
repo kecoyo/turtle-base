@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.kecoyo.turtleopen.common.config.bean;
+package com.kecoyo.turtleopen.common.security.bean;
 
 import lombok.Data;
 
