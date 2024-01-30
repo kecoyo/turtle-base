@@ -1,18 +1,20 @@
 package com.kecoyo.turtleopen.controller;
 
-import com.kecoyo.turtleopen.common.web.ResponseResult;
-import com.kecoyo.turtleopen.domain.dto.UserDTO;
-import com.kecoyo.turtleopen.domain.vo.SysUserVO;
-import com.kecoyo.turtleopen.service.IUserService;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import com.kecoyo.turtleopen.common.dto.AuthUserDto;
+import com.kecoyo.turtleopen.common.web.ResponseResult;
+import com.kecoyo.turtleopen.service.IAuthService;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
 @RestController
 @RequestMapping("/auth")
@@ -20,12 +22,12 @@ import java.util.List;
 public class AuthController {
 
     @Autowired
-    private IUserService userService;
+    private IAuthService authService;
 
-    @Operation(summary = "账号密码登录")
-    @GetMapping("/login")
-    public ResponseResult<List<SysUserVO>> login(@Validated({UserDTO.Login.class}) UserDTO dto) {
-        List<SysUserVO> result = userService.login(dto.getUsername(), dto.getPassword());
+    @Operation(summary = "账号登录")
+    @PostMapping("/login")
+    public ResponseResult<Map<String, Object>> login(@Validated @RequestBody AuthUserDto dto) {
+        Map<String, Object> result = authService.login(dto.getUsername(), dto.getPassword());
         return ResponseResult.success(result);
     }
 

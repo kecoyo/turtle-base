@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "用户")
 @TableName(value = "sys_user", autoResultMap = true)
-public class SysUser extends BaseEntity {
+public class User extends BaseEntity {
 
     @Schema(description = "用户名")
     private String username;

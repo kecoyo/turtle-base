@@ -1,5 +1,6 @@
 package com.kecoyo.turtleopen.domain.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kecoyo.turtleopen.common.base.BaseEntity;
 
@@ -9,20 +10,16 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = false)
-@Schema(description = "应用")
-@TableName("sys_app")
-public class SysApp extends BaseEntity {
+@Schema(description = "图标类型")
+@TableName("butler_icon_type")
+public class Log extends BaseEntity {
 
-    @Schema(description = "应用名称")
+    @Schema(description = "分类名称")
+    @TableField("name")
     private String name;
 
-    @Schema(description = "微信小程序appId")
-    private String wechatAppId;
-
-    @Schema(description = "微信小程序appSecret")
-    private String wechatAppSecret;
-
-    @Schema(description = "应用描述")
+    @Schema(description = "分类描述")
+    @TableField("remark")
     private String remark;
 
 }

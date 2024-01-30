@@ -1,5 +1,6 @@
 package com.kecoyo.turtleopen.common.security;
 
+import com.kecoyo.turtleopen.common.dto.JwtUserDto;
 import com.kecoyo.turtleopen.common.utils.RedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,18 +31,15 @@ public class UserCacheManager {
      * 返回用户缓存
      *
      * @param userName 用户名
-     * @return LoginUserDetails
+     * @return JwtUserDto
      */
-    public LoginUserDetails getUserCache(String userName) {
+    public JwtUserDto getUserCache(String userName) {
         if (StringUtils.isNotEmpty(userName)) {
+            String cacheKey = "user-login-cache:";
             // 获取数据
             Object obj = redisUtils.get(cacheKey + userName);
             if (obj != null) {
-                JSONObject jsonObj = (JSONObject) obj;
-                jsonObj.remove("@type");
-                LoginUserDetails userDetails = jsonObj.toJavaObject(LoginUserDetails.class);
-                return userDetails;
-
+                return (JwtUserDto) obj;
             }
         }
         return null;
@@ -53,7 +51,7 @@ public class UserCacheManager {
      * @param userName 用户名
      */
     @Async
-    public void addUserCache(String userName, LoginUserDetails user) {
+    public void addUserCache(String userName, JwtUserDto user) {
         if (StringUtils.isNotEmpty(userName)) {
             // 添加数据, 避免数据同时过期
             long time = idleTime + RandomUtil.randomInt(900, 1800);

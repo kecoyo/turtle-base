@@ -1,8 +1,8 @@
 package com.kecoyo.turtleopen.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.kecoyo.turtleopen.domain.entity.SysUser;
+import com.kecoyo.turtleopen.domain.entity.User;
 
-public interface UserMapper extends BaseMapper<SysUser> {
+public interface UserMapper extends BaseMapper<User> {
 
 }

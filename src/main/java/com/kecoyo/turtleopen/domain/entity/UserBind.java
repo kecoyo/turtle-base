@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "用户绑定")
 @TableName(value = "sys_user_bind", autoResultMap = true)
-public class SysUserBind extends BaseEntity {
+public class UserBind extends BaseEntity {
 
     @Schema(description = "应用ID")
     private Integer appId;

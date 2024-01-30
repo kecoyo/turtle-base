@@ -11,7 +11,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 @Schema(description = "图标")
 @TableName("butler_icon")
-public class SysFile extends BaseEntity {
+public class File extends BaseEntity {
 
     @Schema(description = "图标分类ID")
     private Integer iconTypeId;

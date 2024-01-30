@@ -33,10 +33,6 @@ public class BaseEntity implements Serializable {
     @TableField("update_at")
     private String updateAt;
 
-    @Schema(description = "排序权重")
-    @TableField("sort")
-    private Integer sort;
-
     @Schema(description = "状态(0禁用,1启用)")
     @TableField("status")
     private Integer status;

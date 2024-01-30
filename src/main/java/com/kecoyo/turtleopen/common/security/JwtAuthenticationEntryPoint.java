@@ -6,13 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
-import cn.hutool.core.date.DateField;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.IdUtil;
-import cn.hutool.crypto.digest.DigestUtil;
-import com.kecoyo.turtleopen.common.config.bean.SecurityProperties;
-import com.kecoyo.turtleopen.common.utils.RedisUtils;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,10 +16,24 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
+import com.kecoyo.turtleopen.common.config.bean.SecurityProperties;
+import com.kecoyo.turtleopen.common.utils.RedisUtils;
 import com.kecoyo.turtleopen.common.web.ApiError;
 
+import cn.hutool.core.date.DateField;
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.util.IdUtil;
+import cn.hutool.crypto.digest.DigestUtil;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.JwtBuilder;
+import io.jsonwebtoken.JwtParser;
+import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
@@ -79,8 +86,9 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
          */
         public String createToken(Authentication authentication) {
             return jwtBuilder
-                // 加入ID确保生成的 Token 都不一致
-                .setId(IdUtil.simpleUUID()).claim(AUTHORITIES_KEY, authentication.getName()).setSubject(authentication.getName()).compact();
+                    // 加入ID确保生成的 Token 都不一致
+                    .setId(IdUtil.simpleUUID()).claim(AUTHORITIES_KEY, authentication.getName())
+                    .setSubject(authentication.getName()).compact();
         }
 
         /**

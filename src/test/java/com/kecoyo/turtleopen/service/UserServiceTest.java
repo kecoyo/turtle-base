@@ -8,10 +8,10 @@ import org.springframework.boot.test.context.SpringBootTest;
  * 供应商信息 Mapper 测试类
  */
 @SpringBootTest
-public class SysUserServiceTest {
+public class UserServiceTest {
 
     @Autowired
-    private UserService accountService;
+    private IUserService userService;
 
     @Test
     void queryAccount() {

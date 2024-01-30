@@ -1,27 +1,33 @@
 package com.kecoyo.turtleopen.common.security;
 
-import com.kecoyo.turtleopen.common.exception.BadRequestException;
-import com.kecoyo.turtleopen.domain.entity.SysUser;
-import com.kecoyo.turtleopen.service.UserService;
+import java.util.ArrayList;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-@Service
+import com.kecoyo.turtleopen.common.dto.JwtUserDto;
+import com.kecoyo.turtleopen.common.exception.BadRequestException;
+import com.kecoyo.turtleopen.common.exception.EntityNotFoundException;
+import com.kecoyo.turtleopen.domain.dto.UserLoginDto;
+import com.kecoyo.turtleopen.service.IUserService;
+
+@Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Autowired
     private UserCacheManager userCacheManager;
+
     @Autowired
-    private UserService userService;
+    private IUserService userService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LoginUserDetails userDetails = userCacheManager.getUserCache(username);
-        if (userDetails == null) {
-            SysUser user;
+        JwtUserDto jwtUserDto = userCacheManager.getUserCache(username);
+        if (jwtUserDto == null) {
+            UserLoginDto user;
             try {
                 user = userService.getLoginData(username);
             } catch (EntityNotFoundException e) {
@@ -29,10 +35,21 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 throw new UsernameNotFoundException(username, e);
             }
             if (user == null) {
-                throw new BadRequestException("账号未激活！");
+                throw new UsernameNotFoundException("");
+            } else {
+                // if (!user.getEnabled()) {
+                // throw new BadRequestException("账号未激活！");
+                // }
+                // jwtUserDto = new JwtUserDto(
+                // user,
+                // dataService.getDeptIds(user),
+                // roleService.mapToGrantedAuthorities(user));
+                jwtUserDto = new JwtUserDto(user, null, new ArrayList<>());
+                // 添加缓存数据
+                userCacheManager.addUserCache(username, jwtUserDto);
             }
         }
-        return userDetails;
+        return jwtUserDto;
     }
 
 }
