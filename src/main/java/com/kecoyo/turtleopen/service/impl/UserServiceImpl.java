@@ -1,9 +1,9 @@
 package com.kecoyo.turtleopen.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kecoyo.turtleopen.common.TokenProvider;
 import com.kecoyo.turtleopen.common.config.bean.SecurityProperties;
 import com.kecoyo.turtleopen.common.dto.JwtUserDto;
+import com.kecoyo.turtleopen.common.security.JwtAuthenticationEntryPoint;
 import com.kecoyo.turtleopen.domain.entity.SysUser;
 import com.kecoyo.turtleopen.mapper.UserMapper;
 import com.kecoyo.turtleopen.service.UserService;
@@ -28,7 +28,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, SysUser> implements
     @Autowired
     private AuthenticationManagerBuilder authenticationManagerBuilder;
     @Autowired
-    private TokenProvider tokenProvider;
+    private JwtAuthenticationEntryPoint.TokenProvider tokenProvider;
     @Autowired
     private SecurityProperties properties;
     @Autowired
