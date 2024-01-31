@@ -38,4 +38,26 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
         return user;
     }
 
+    @Override
+    public User createUser(User user) {
+        this.save(user);
+        return user;
+    }
+
+    @Override
+    public void updateUser(User user) {
+        this.updateById(user);
+    }
+
+    @Override
+    public void deleteUser(Integer id) {
+        this.removeById(id);
+    }
+
+    @Override
+    public void changePassword(String username, String oldPassword, String newPassword) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'changePassword'");
+    }
+
 }

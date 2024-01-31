@@ -10,4 +10,12 @@ public interface IUserService extends IService<User> {
 
     User loadUserByUsername(String username);
 
+    User createUser(User user);
+
+    void updateUser(User user);
+
+    void deleteUser(Integer id);
+
+    void changePassword(String username, String oldPassword, String newPassword);
+
 }
