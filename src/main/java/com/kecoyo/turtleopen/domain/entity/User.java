@@ -1,16 +1,26 @@
 package com.kecoyo.turtleopen.domain.entity;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+import java.util.Date;
+
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.kecoyo.turtleopen.common.base.BaseEntity;
+
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Schema(description = "用户")
 @TableName(value = "sys_user", autoResultMap = true)
-public class User extends BaseEntity {
+public class User implements Serializable {
+
+    @Schema(description = "ID")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @Schema(description = "用户名")
     private String username;
@@ -27,15 +37,6 @@ public class User extends BaseEntity {
     @Schema(description = "用户手机")
     private String phone;
 
-    @Schema(description = "所在省份")
-    private String province;
-
-    @Schema(description = "所在城市")
-    private String city;
-
-    @Schema(description = "所在区域")
-    private String county;
-
     @Schema(description = "用户性别")
     private String gender;
 
@@ -47,5 +48,21 @@ public class User extends BaseEntity {
 
     @Schema(description = "用户备注")
     private String remark;
+
+    @Schema(description = "创建时间")
+    @TableField("create_at")
+    private Timestamp createAt;
+
+    @Schema(description = "更新时间")
+    @TableField("update_at")
+    private Timestamp updateAt;
+
+    @Schema(description = "状态(0禁用,1启用)")
+    @TableField("status")
+    private Integer status;
+
+    @Schema(description = "删除状态(0正常,1删除)")
+    @TableField("deleted")
+    private Integer deleted;
 
 }

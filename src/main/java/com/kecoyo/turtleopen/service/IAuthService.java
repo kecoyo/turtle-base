@@ -1,13 +1,14 @@
 package com.kecoyo.turtleopen.service;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.kecoyo.turtleopen.domain.entity.User;
-
 import java.util.Map;
+
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.kecoyo.turtleopen.common.dto.JwtUserDto;
+import com.kecoyo.turtleopen.domain.entity.User;
 
 public interface IAuthService extends IService<User> {
 
-    Map<String, Object> login(String username, String password);
+    JwtUserDto login(String username, String password);
 
     Map<String, Object> tokenLogin(String token);
 

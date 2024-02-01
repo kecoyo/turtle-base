@@ -1,14 +1,14 @@
 package com.kecoyo.turtleopen.domain.dto;
 
-import java.util.Date;
+import java.io.Serializable;
+import java.sql.Timestamp;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.kecoyo.turtleopen.common.base.BaseDTO;
 
 import lombok.Data;
 
 @Data
-public class UserDto extends BaseDTO {
+public class UserDto implements Serializable {
 
     private Integer id;
 
@@ -19,17 +19,26 @@ public class UserDto extends BaseDTO {
 
     private String name;
 
-    private String email;
+    private String avatar;
 
     private String phone;
 
     private String gender;
 
-    private String avatar;
+    private String birthday;
+
+    private String email;
+
+    private String remark;
+
+    private Timestamp createAt;
+
+    private Timestamp updateAt;
 
     @JSONField(serialize = false)
-    private Boolean isAdmin = false;
+    private Integer status;
 
-    private Date pwdResetTime;
+    @JSONField(serialize = false)
+    private Integer deleted;
 
 }

@@ -8,6 +8,6 @@ public interface IUserService extends IService<User> {
 
     UserLoginDto getLoginData(String username);
 
-    User loadUserByUsername(String username);
+    User findByUsername(String username);
 
 }

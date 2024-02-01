@@ -3,6 +3,10 @@ package com.kecoyo.turtleopen.common.dto;
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;
 
+/**
+ * @description 用户登录参数
+ */
+
 @Data
 public class AuthUserDto {
 

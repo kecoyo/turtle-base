@@ -1,6 +1,7 @@
 package com.kecoyo.turtleopen.common.base;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -27,11 +28,11 @@ public class BaseEntity implements Serializable {
 
     @Schema(description = "创建时间")
     @TableField("create_at")
-    private String createAt;
+    private LocalDateTime createAt;
 
     @Schema(description = "更新时间")
     @TableField("update_at")
-    private String updateAt;
+    private LocalDateTime updateAt;
 
     @Schema(description = "状态(0禁用,1启用)")
     @TableField("status")

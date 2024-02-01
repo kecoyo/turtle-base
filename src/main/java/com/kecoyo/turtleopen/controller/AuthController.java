@@ -10,11 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.kecoyo.turtleopen.common.dto.AuthUserDto;
+import com.kecoyo.turtleopen.common.dto.JwtUserDto;
+import com.kecoyo.turtleopen.common.dto.LoginUserDto;
 import com.kecoyo.turtleopen.common.web.ResponseResult;
 import com.kecoyo.turtleopen.service.IAuthService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
 @RestController
 @RequestMapping("/auth")
@@ -26,9 +30,15 @@ public class AuthController {
 
     @Operation(summary = "账号登录")
     @PostMapping("/login")
-    public ResponseResult<Map<String, Object>> login(@Validated @RequestBody AuthUserDto dto) {
-        Map<String, Object> result = authService.login(dto.getUsername(), dto.getPassword());
+    public ResponseResult<JwtUserDto> login(@Validated @RequestBody AuthUserDto dto) {
+        JwtUserDto result = authService.login(dto.getUsername(), dto.getPassword());
         return ResponseResult.success(result);
     }
 
+    @Operation(summary = "令牌登录")
+    @PostMapping("/tokenLogin")
+    public ResponseResult<Map<String, Object>> tokenLogin(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = authService.tokenLogin("");
+        return ResponseResult.success(result);
+    }
 }

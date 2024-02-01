@@ -10,19 +10,24 @@ import com.alibaba.fastjson.annotation.JSONField;
 import com.kecoyo.turtleopen.domain.dto.UserLoginDto;
 
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Data;
 
-@Getter
+@Data
 @AllArgsConstructor
 public class JwtUserDto implements UserDetails {
 
-    private final UserLoginDto user;
+    private UserLoginDto user;
 
-    private final List<Long> dataScopes;
+    private List<Long> dataScopes;
 
-    private final List<AuthorityDto> authorities;
+    private List<AuthorityDto> authorities;
+
+    private String token;
 
     public Set<String> getRoles() {
+        if (authorities == null || authorities.isEmpty()) {
+            return null;
+        }
         return authorities.stream().map(AuthorityDto::getAuthority).collect(Collectors.toSet());
     }
 

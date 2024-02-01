@@ -25,7 +25,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        JwtUserDto jwtUserDto = userCacheManager.getUserCache(username);
+        // JwtUserDto jwtUserDto = userCacheManager.getUserCache(username);
+        JwtUserDto jwtUserDto = null;
         if (jwtUserDto == null) {
             UserLoginDto user;
             try {
@@ -37,14 +38,12 @@ public class UserDetailsServiceImpl implements UserDetailsService {
             if (user == null) {
                 throw new UsernameNotFoundException("");
             } else {
-                // if (!user.getEnabled()) {
-                // throw new BadRequestException("账号未激活！");
-                // }
-                // jwtUserDto = new JwtUserDto(
-                // user,
-                // dataService.getDeptIds(user),
-                // roleService.mapToGrantedAuthorities(user));
-                jwtUserDto = new JwtUserDto(user, null, new ArrayList<>());
+                if (user.getStatus() == 0) {
+                    throw new BadRequestException("账号未激活！");
+                }
+
+                jwtUserDto = new JwtUserDto(user, null, new ArrayList<>(), "");
+
                 // 添加缓存数据
                 userCacheManager.addUserCache(username, jwtUserDto);
             }

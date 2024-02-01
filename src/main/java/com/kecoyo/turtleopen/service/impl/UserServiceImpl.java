@@ -22,7 +22,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
 
     @Override
     public UserLoginDto getLoginData(String username) {
-        User user = this.loadUserByUsername(username);
+        User user = this.findByUsername(username);
         if (user == null) {
             throw new EntityNotFoundException(User.class, "username", username);
         } else {
@@ -31,7 +31,7 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IU
     }
 
     @Override
-    public User loadUserByUsername(String username) {
+    public User findByUsername(String username) {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("username", username);
         User user = this.getOne(queryWrapper);

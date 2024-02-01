@@ -10,6 +10,4 @@ public interface BeanMapper {
 
     UserLoginDto toUserLoginDto(User user);
 
-    UserLoginDto toUserLoginDto2(User user);
-
 }
