@@ -7,11 +7,11 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kecoyo.turtleopen.domain.entity.User;
 import com.kecoyo.turtleopen.mapper.UserMapper;
-import com.kecoyo.turtleopen.service.IUserService;
+import com.kecoyo.turtleopen.service.UserService;
 import com.kecoyo.turtleopen.service.mapstruct.BeanMapper;
 
 @Service
-public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements IUserService {
+public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements UserService {
 
     @Autowired
     private BeanMapper beanMapper;

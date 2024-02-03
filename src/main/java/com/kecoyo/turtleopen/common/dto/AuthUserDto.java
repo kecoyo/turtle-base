@@ -16,7 +16,13 @@ public class AuthUserDto {
     @NotBlank
     private String password;
 
+    @NotBlank(groups = { WxMiniLogin.class })
     private String code;
 
+    private Integer appId;
+
     private String uuid = "";
+
+    public @interface WxMiniLogin {
+    }
 }

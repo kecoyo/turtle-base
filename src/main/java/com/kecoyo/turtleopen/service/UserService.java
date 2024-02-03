@@ -3,7 +3,7 @@ package com.kecoyo.turtleopen.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kecoyo.turtleopen.domain.entity.User;
 
-public interface IRoleService extends IService<User> {
+public interface UserService extends IService<User> {
 
     User findByUsername(String username);
 

@@ -10,14 +10,13 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.baomidou.mybatisplus.core.injector.methods.Delete;
 import com.kecoyo.turtleopen.common.DeleteStatus;
 import com.kecoyo.turtleopen.common.UserStatus;
 import com.kecoyo.turtleopen.common.dto.JwtUserDto;
-import com.kecoyo.turtleopen.common.exception.BadRequestException;
 import com.kecoyo.turtleopen.common.exception.EntityNotFoundException;
 import com.kecoyo.turtleopen.domain.entity.User;
-import com.kecoyo.turtleopen.service.IUserService;
+import com.kecoyo.turtleopen.service.RoleService;
+import com.kecoyo.turtleopen.service.UserService;
 
 @Service("userDetailsService")
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -26,10 +25,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private UserCacheManager userCacheManager;
 
     @Autowired
-    private IUserService userService;
+    private UserService userService;
 
     @Autowired
-    private IRoleService roleService;
+    private RoleService roleService;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

@@ -75,6 +75,15 @@ public class TokenProvider implements InitializingBean {
                 .compact();
     }
 
+    public String createToken(String userId) {
+        return jwtBuilder
+                // 加入ID确保生成的 Token 都不一致
+                .setId(IdUtil.simpleUUID())
+                .claim(AUTHORITIES_KEY, userId)
+                .setSubject(userId)
+                .compact();
+    }
+
     /**
      * 依据Token 获取鉴权信息
      *

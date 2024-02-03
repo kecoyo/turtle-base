@@ -118,28 +118,32 @@ public class SpringSecurityConfig {
                 .logout(logout -> logout.disable())
                 .authorizeHttpRequests((authorize) -> {
                     // authorize.requestMatchers(HttpMethod.GET,
-                    //         anonymousUrls.get(RequestMethodEnum.GET.getType()).toArray(new String[0])).permitAll();
+                    // anonymousUrls.get(RequestMethodEnum.GET.getType()).toArray(new
+                    // String[0])).permitAll();
                     // authorize.requestMatchers(HttpMethod.POST,
-                    //         anonymousUrls.get(RequestMethodEnum.POST.getType()).toArray(new String[0])).permitAll();
+                    // anonymousUrls.get(RequestMethodEnum.POST.getType()).toArray(new
+                    // String[0])).permitAll();
                     // authorize.requestMatchers(HttpMethod.PUT,
-                    //         anonymousUrls.get(RequestMethodEnum.PUT.getType()).toArray(new String[0])).permitAll();
+                    // anonymousUrls.get(RequestMethodEnum.PUT.getType()).toArray(new
+                    // String[0])).permitAll();
                     // authorize.requestMatchers(HttpMethod.DELETE,
-                    //         anonymousUrls.get(RequestMethodEnum.DELETE.getType()).toArray(new String[0]))
-                    //         .permitAll();
+                    // anonymousUrls.get(RequestMethodEnum.DELETE.getType()).toArray(new String[0]))
+                    // .permitAll();
                     // authorize.requestMatchers(HttpMethod.PATCH,
-                    //         anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
-                    //         .permitAll();
+                    // anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
+                    // .permitAll();
                     // authorize.requestMatchers(
-                    //         anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
-                    //         .permitAll();
+                    // anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
+                    // .permitAll();
                     // authorize.anyRequest().authenticated();
                     authorize.anyRequest().permitAll();
                 })
                 .exceptionHandling((exceptionHandling) -> exceptionHandling
                         .authenticationEntryPoint(jwtAuthenticationEntryPoint)
                         .accessDeniedHandler(jwtAccessDeniedHandler))
-                .userDetailsService(userDetailsService)
-                .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .userDetailsService(userDetailsService);
+        // .addFilterBefore(jwtTokenFilter(),
+        // UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
