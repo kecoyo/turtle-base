@@ -28,12 +28,12 @@ public class GlobalExceptionHandler {
     /**
      * 处理所有不可知的异常
      */
-    @ExceptionHandler(Exception.class)
-    public ResponseEntity<ApiError> handleException(Exception e) {
-        // 打印堆栈信息
-        log.error(ThrowableUtil.getStackTrace(e));
-        return buildResponseEntity(ApiError.error(e.getMessage()));
-    }
+    // @ExceptionHandler(Exception.class)
+    // public ResponseEntity<ApiError> handleException(Exception e) {
+    //     // 打印堆栈信息
+    //     log.error(ThrowableUtil.getStackTrace(e));
+    //     return buildResponseEntity(ApiError.error(e.getMessage()));
+    // }
 
     /**
      * BadCredentialsException

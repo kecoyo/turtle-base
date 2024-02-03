@@ -3,6 +3,7 @@ package com.kecoyo.turtleopen.controller;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -37,8 +38,23 @@ public class AuthController {
 
     @Operation(summary = "令牌登录")
     @PostMapping("/tokenLogin")
-    public ResponseResult<Map<String, Object>> tokenLogin(HttpServletRequest request, HttpServletResponse response) {
-        Map<String, Object> result = authService.tokenLogin("");
+    // @PreAuthorize("permitAll()")
+    public ResponseResult<JwtUserDto> tokenLogin(HttpServletRequest request, HttpServletResponse response) {
+        JwtUserDto result = authService.tokenLogin("");
+        return ResponseResult.success(result);
+    }
+
+    @Operation(summary = "微信小程序登录")
+    @PostMapping("/wxMiniLogin")
+    public ResponseResult<Map<String, Object>> wxMiniLogin(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = authService.wxMiniLogin("");
+        return ResponseResult.success(result);
+    }
+
+    @Operation(summary = "微信开放认证登录")
+    @PostMapping("/wxOauthLogin")
+    public ResponseResult<Map<String, Object>> wxOauthLogin(HttpServletRequest request, HttpServletResponse response) {
+        Map<String, Object> result = authService.wxOauthLogin("");
         return ResponseResult.success(result);
     }
 }

@@ -117,21 +117,21 @@ public class SpringSecurityConfig {
                 .formLogin(formLogin -> formLogin.disable())
                 .logout(logout -> logout.disable())
                 .authorizeHttpRequests((authorize) -> {
-                    authorize.requestMatchers(HttpMethod.GET,
-                            anonymousUrls.get(RequestMethodEnum.GET.getType()).toArray(new String[0])).permitAll();
-                    authorize.requestMatchers(HttpMethod.POST,
-                            anonymousUrls.get(RequestMethodEnum.POST.getType()).toArray(new String[0])).permitAll();
-                    authorize.requestMatchers(HttpMethod.PUT,
-                            anonymousUrls.get(RequestMethodEnum.PUT.getType()).toArray(new String[0])).permitAll();
-                    authorize.requestMatchers(HttpMethod.DELETE,
-                            anonymousUrls.get(RequestMethodEnum.DELETE.getType()).toArray(new String[0]))
-                            .permitAll();
-                    authorize.requestMatchers(HttpMethod.PATCH,
-                            anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
-                            .permitAll();
-                    authorize.requestMatchers(
-                            anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
-                            .permitAll();
+                    // authorize.requestMatchers(HttpMethod.GET,
+                    //         anonymousUrls.get(RequestMethodEnum.GET.getType()).toArray(new String[0])).permitAll();
+                    // authorize.requestMatchers(HttpMethod.POST,
+                    //         anonymousUrls.get(RequestMethodEnum.POST.getType()).toArray(new String[0])).permitAll();
+                    // authorize.requestMatchers(HttpMethod.PUT,
+                    //         anonymousUrls.get(RequestMethodEnum.PUT.getType()).toArray(new String[0])).permitAll();
+                    // authorize.requestMatchers(HttpMethod.DELETE,
+                    //         anonymousUrls.get(RequestMethodEnum.DELETE.getType()).toArray(new String[0]))
+                    //         .permitAll();
+                    // authorize.requestMatchers(HttpMethod.PATCH,
+                    //         anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
+                    //         .permitAll();
+                    // authorize.requestMatchers(
+                    //         anonymousUrls.get(RequestMethodEnum.PATCH.getType()).toArray(new String[0]))
+                    //         .permitAll();
                     // authorize.anyRequest().authenticated();
                     authorize.anyRequest().permitAll();
                 })

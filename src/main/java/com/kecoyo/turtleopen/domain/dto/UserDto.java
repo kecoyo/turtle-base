@@ -23,7 +23,7 @@ public class UserDto implements Serializable {
 
     private String phone;
 
-    private String gender;
+    private Integer gender;
 
     private String birthday;
 

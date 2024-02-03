@@ -10,7 +10,7 @@ public interface IAuthService extends IService<User> {
 
     JwtUserDto login(String username, String password);
 
-    Map<String, Object> tokenLogin(String token);
+    JwtUserDto tokenLogin(String token);
 
     Map<String, Object> wxMiniLogin(String appId, String code, String encryptedData, String iv);
 

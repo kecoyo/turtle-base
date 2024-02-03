@@ -40,7 +40,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
 
     @Override
     public JwtUserDto login(String username, String password) {
-        // // 密码解密
+        // 密码解密
         // String password = RsaUtils.decryptByPrivateKey(RsaProperties.privateKey,
         // authUser.getPassword());
 
@@ -62,23 +62,16 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements IA
     }
 
     @Override
-    public Map<String, Object> tokenLogin(String token) {
+    public JwtUserDto tokenLogin(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                 userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token2 = tokenProvider.createToken(authentication);
-        final JwtUserDto jwtUserDto = (JwtUserDto) authentication.getPrincipal();
+        JwtUserDto jwtUserDto = (JwtUserDto) authentication.getPrincipal();
 
-        Map<String, Object> authInfo = new HashMap<String, Object>(2) {
-            {
-                put("token", properties.getTokenStartWith() + token);
-                put("user", jwtUserDto);
-            }
-        };
-
-        return authInfo;
+        return jwtUserDto;
     }
 
     @Override

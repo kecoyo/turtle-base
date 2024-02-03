@@ -38,7 +38,7 @@ public class User implements Serializable {
     private String phone;
 
     @Schema(description = "用户性别")
-    private String gender;
+    private Integer gender;
 
     @Schema(description = "用户生日")
     private String birthday;

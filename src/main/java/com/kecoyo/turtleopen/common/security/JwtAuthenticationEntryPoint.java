@@ -19,12 +19,12 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException {
-        response.setContentType("application/json;charset=UTF-8");
 
         ApiError apiError = ApiError.error(HttpStatus.UNAUTHORIZED.value(), "当前登录状态过期");
         Integer code = apiError.getStatus();
         String message = JSON.toJSONString(apiError);
 
+        response.setContentType("application/json;charset=UTF-8");
         response.setStatus(code);
         response.getWriter().write(message);
     }

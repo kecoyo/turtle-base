@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.alibaba.fastjson.annotation.JSONField;
@@ -11,59 +12,76 @@ import com.kecoyo.turtleopen.domain.dto.UserLoginDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 @AllArgsConstructor
 public class JwtUserDto implements UserDetails {
 
-    private UserLoginDto user;
+    private Integer id;
+
+    private String username;
+
+    private String password;
+
+    private String name;
+
+    private String phone;
+
+    private String email;
+
+    private String avatar;
+
+    private Integer gender;
+
+    private String birthday;
+
+    private String token;
 
     private List<Long> dataScopes;
 
-    private List<AuthorityDto> authorities;
+    private List<GrantedAuthority> authorities;
 
-    private String token;
+    private boolean accountNonExpired;
+    private boolean accountNonLocked;
+    private boolean credentialsNonExpired;
+    private boolean enabled;
 
     public Set<String> getRoles() {
         if (authorities == null || authorities.isEmpty()) {
             return null;
         }
-        return authorities.stream().map(AuthorityDto::getAuthority).collect(Collectors.toSet());
+        return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
     }
 
     @Override
-    @JSONField(serialize = false)
     public String getPassword() {
-        return user.getPassword();
+        return password;
     }
 
     @Override
-    @JSONField(serialize = false)
     public String getUsername() {
-        return user.getUsername();
+        return username;
     }
 
-    @JSONField(serialize = false)
     @Override
     public boolean isAccountNonExpired() {
-        return true;
+        return accountNonExpired;
     }
 
-    @JSONField(serialize = false)
     @Override
     public boolean isAccountNonLocked() {
-        return true;
+        return accountNonLocked;
     }
 
-    @JSONField(serialize = false)
     @Override
     public boolean isCredentialsNonExpired() {
-        return true;
+        return credentialsNonExpired;
     }
 
     @Override
-    @JSONField(serialize = false)
     public boolean isEnabled() {
-        return true;
+        return enabled;
     }
 }

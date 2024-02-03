@@ -2,18 +2,22 @@ package com.kecoyo.turtleopen.common.security;
 
 import java.io.IOException;
 
-import com.kecoyo.turtleopen.common.security.bean.JwtProperties;
-import com.kecoyo.turtleopen.common.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.web.authentication.AnonymousAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
+
+import com.kecoyo.turtleopen.common.security.bean.JwtProperties;
+import com.kecoyo.turtleopen.common.utils.JwtUtils;
 
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.crypto.digest.DigestUtil;
@@ -61,6 +65,25 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 SecurityContextHolder.getContext().setAuthentication(authentication2);
                 // Token 续期
                 // tokenProvider.checkRenewal(token);
+            } else {
+                String username = getUserName(token);
+
+                // 生成令牌与第三方系统获取令牌方式
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                Authentication authentication2 = new
+                UsernamePasswordAuthenticationToken(userDetails,
+                userDetails.getPassword(), userDetails.getAuthorities());
+                SecurityContextHolder.getContext().setAuthentication(authentication2);
+
+                // AnonymousAuthenticationToken authentication2 = new
+                // AnonymousAuthenticationToken("anonymous", "anonymous",
+                // AuthorityUtils.createAuthorityList("anonymous"));
+                // SecurityContextHolder.getContext().setAuthentication(authentication2);
+
+                // Authentication authentication2 = new
+                // UsernamePasswordAuthenticationToken("anonymous",
+                // "anonymous", AuthorityUtils.createAuthorityList("anonymous"));
+                // SecurityContextHolder.getContext().setAuthentication(authentication2);
             }
         }
 
