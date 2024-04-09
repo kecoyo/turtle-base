@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kecoyo.turtlebase.domain.entity.UserBind;
+import com.kecoyo.turtlebase.model.UserBind;
 import com.kecoyo.turtlebase.mapper.UserBindMapper;
 import com.kecoyo.turtlebase.service.UserBindService;
 

@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.domain.dto;
+package com.kecoyo.turtlebase.dto;
 
 /**
  * @description 用户缓存时使用

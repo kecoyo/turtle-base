@@ -3,7 +3,7 @@ package com.kecoyo.turtlebase.service.impl;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kecoyo.turtlebase.domain.entity.App;
+import com.kecoyo.turtlebase.model.App;
 import com.kecoyo.turtlebase.mapper.AppMapper;
 import com.kecoyo.turtlebase.service.AppService;
 

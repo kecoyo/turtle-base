@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.domain.type;
+package com.kecoyo.turtlebase.enums;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

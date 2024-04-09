@@ -5,14 +5,19 @@ server:
     mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
 
 spring:
+  application:
+    name: turtle-base
   profiles:
     active: dev
-  controllor:
-    context-path: /api
   jackson:
     default-property-inclusion: non_null # 序列化时，只序列化非空字段
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/turtle_open?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    username: root
+    password: 123456
   data:
     redis:
       host: localhost
@@ -32,7 +37,7 @@ mybatis-plus:
       logic-delete-value: 1 # 逻辑已删除值(默认为 1)
       logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
   mapper-locations: classpath*:mapper/*.xml
-  type-aliases-package: com.kecoyo.**.domain
+  type-aliases-package: com.kecoyo.*.model
 
 springdoc:
   swagger-ui:

@@ -1,16 +1,21 @@
-package com.kecoyo.turtlebase.domain.entity;
+package com.kecoyo.turtlebase.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.kecoyo.turtlebase.common.base.BaseEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Schema(description = "用户绑定")
-@TableName(value = "sys_user_bind", autoResultMap = true)
-public class UserBind extends BaseEntity {
+@TableName("sys_user_bind")
+public class UserBind implements Serializable {
+
+    @Schema(description = "ID")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @Schema(description = "应用ID")
     private Integer appId;

@@ -1,19 +1,18 @@
-package com.kecoyo.turtlebase.domain.entity;
-
-import java.io.Serializable;
-import java.sql.Timestamp;
+package com.kecoyo.turtlebase.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
+import java.io.Serializable;
+import java.sql.Timestamp;
+
 @Data
 @Schema(description = "用户")
-@TableName(value = "sys_user", autoResultMap = true)
+@TableName("sys_user")
 public class User implements Serializable {
 
     @Schema(description = "ID")

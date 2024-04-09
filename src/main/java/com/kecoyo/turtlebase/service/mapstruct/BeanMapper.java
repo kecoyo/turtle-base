@@ -2,8 +2,8 @@ package com.kecoyo.turtlebase.service.mapstruct;
 
 import org.mapstruct.Mapper;
 
-import com.kecoyo.turtlebase.domain.dto.UserLoginDto;
-import com.kecoyo.turtlebase.domain.entity.User;
+import com.kecoyo.turtlebase.dto.UserLoginDto;
+import com.kecoyo.turtlebase.model.User;
 
 @Mapper(componentModel = "spring")
 public interface BeanMapper {

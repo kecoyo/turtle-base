@@ -23,7 +23,7 @@ import lombok.extern.slf4j.Slf4j;
 // @EnableWebMvc
 public class WebMvcConfig implements WebMvcConfigurer {
 
-    @Value("${spring.controllor.context-path}")
+//    @Value("${spring.controllor.context-path}")
     private String contextPath;
 
     @Override

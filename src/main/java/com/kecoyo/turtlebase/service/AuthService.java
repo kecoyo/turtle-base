@@ -2,7 +2,7 @@ package com.kecoyo.turtlebase.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.kecoyo.turtlebase.common.dto.JwtUserDto;
-import com.kecoyo.turtlebase.domain.entity.User;
+import com.kecoyo.turtlebase.model.User;
 
 public interface AuthService extends IService<User> {
 

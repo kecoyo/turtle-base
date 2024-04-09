@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.domain.entity;
+package com.kecoyo.turtlebase.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -9,21 +9,17 @@ import lombok.Data;
 import java.io.Serializable;
 
 @Data
-@Schema(description = "区域")
-@TableName("t_area")
-public class Area implements Serializable {
+@TableName("sys_role")
+public class Role implements Serializable {
 
     @Schema(description = "ID")
-    @TableId(value = "id", type = IdType.NONE)
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
-    @Schema(description = "区域名称")
     private String name;
 
-    @Schema(description = "父级ID")
-    private Integer pid;
-
-    @Schema(description = "级别")
     private Integer level;
+
+    private String remark;
 
 }

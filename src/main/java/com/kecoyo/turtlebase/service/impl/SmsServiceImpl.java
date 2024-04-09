@@ -4,14 +4,12 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kecoyo.turtlebase.common.utils.SecurityUtils;
 import com.kecoyo.turtlebase.common.utils.ValidateCodeUtils;
-import com.kecoyo.turtlebase.domain.entity.Sms;
-import com.kecoyo.turtlebase.domain.entity.User;
+import com.kecoyo.turtlebase.model.Sms;
 import com.kecoyo.turtlebase.mapper.SmsMapper;
 import com.kecoyo.turtlebase.service.SmsService;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
-import java.util.List;
 
 @Service
 public class SmsServiceImpl extends ServiceImpl<SmsMapper, Sms> implements SmsService {

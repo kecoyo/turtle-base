@@ -14,7 +14,7 @@ import com.kecoyo.turtlebase.common.DeleteStatus;
 import com.kecoyo.turtlebase.common.UserStatus;
 import com.kecoyo.turtlebase.common.dto.JwtUserDto;
 import com.kecoyo.turtlebase.common.exception.EntityNotFoundException;
-import com.kecoyo.turtlebase.domain.entity.User;
+import com.kecoyo.turtlebase.model.User;
 import com.kecoyo.turtlebase.service.RoleService;
 import com.kecoyo.turtlebase.service.UserService;
 

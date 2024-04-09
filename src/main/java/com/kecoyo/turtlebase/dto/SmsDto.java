@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.domain.dto;
+package com.kecoyo.turtlebase.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

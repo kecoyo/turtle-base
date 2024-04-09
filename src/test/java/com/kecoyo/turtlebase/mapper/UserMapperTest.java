@@ -1,6 +1,6 @@
 package com.kecoyo.turtlebase.mapper;
 
-import com.kecoyo.turtlebase.domain.entity.User;
+import com.kecoyo.turtlebase.model.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

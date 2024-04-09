@@ -1,7 +1,7 @@
 package com.kecoyo.turtlebase.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kecoyo.turtlebase.domain.entity.App;
+import com.kecoyo.turtlebase.model.App;
 
 public interface AppService extends IService<App> {
 

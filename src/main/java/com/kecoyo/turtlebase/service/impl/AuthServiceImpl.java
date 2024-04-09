@@ -1,6 +1,5 @@
 package com.kecoyo.turtlebase.service.impl;
 
-import com.kecoyo.turtlebase.common.utils.SecurityUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -19,9 +18,9 @@ import com.kecoyo.turtlebase.common.security.TokenProvider;
 import com.kecoyo.turtlebase.common.security.bean.SecurityProperties;
 import com.kecoyo.turtlebase.common.utils.HttpClientResult;
 import com.kecoyo.turtlebase.common.utils.HttpClientUtils;
-import com.kecoyo.turtlebase.domain.entity.App;
-import com.kecoyo.turtlebase.domain.entity.User;
-import com.kecoyo.turtlebase.domain.entity.UserBind;
+import com.kecoyo.turtlebase.model.App;
+import com.kecoyo.turtlebase.model.User;
+import com.kecoyo.turtlebase.model.UserBind;
 import com.kecoyo.turtlebase.mapper.UserMapper;
 import com.kecoyo.turtlebase.service.AppService;
 import com.kecoyo.turtlebase.service.AuthService;

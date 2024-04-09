@@ -1,7 +1,7 @@
 package com.kecoyo.turtlebase.controller;
 
 import com.kecoyo.turtlebase.common.web.ResponseResult;
-import com.kecoyo.turtlebase.domain.entity.Area;
+import com.kecoyo.turtlebase.model.Area;
 import com.kecoyo.turtlebase.service.AreaService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;

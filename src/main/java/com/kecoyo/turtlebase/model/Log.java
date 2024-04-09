@@ -1,18 +1,22 @@
-package com.kecoyo.turtlebase.domain.entity;
+package com.kecoyo.turtlebase.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.kecoyo.turtlebase.common.base.BaseEntity;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
+
+import java.io.Serializable;
 
 @Data
-@EqualsAndHashCode(callSuper = false)
 @Schema(description = "图标类型")
 @TableName("butler_icon_type")
-public class Log extends BaseEntity {
+public class Log implements Serializable {
+
+    @Schema(description = "ID")
+    @TableId(value = "id", type = IdType.AUTO)
+    private Integer id;
 
     @Schema(description = "分类名称")
     @TableField("name")

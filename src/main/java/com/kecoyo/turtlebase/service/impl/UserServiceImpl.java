@@ -5,7 +5,7 @@ import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kecoyo.turtlebase.domain.entity.User;
+import com.kecoyo.turtlebase.model.User;
 import com.kecoyo.turtlebase.mapper.UserMapper;
 import com.kecoyo.turtlebase.service.UserService;
 import com.kecoyo.turtlebase.service.mapstruct.BeanMapper;

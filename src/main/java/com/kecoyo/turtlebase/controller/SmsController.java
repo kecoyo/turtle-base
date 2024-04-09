@@ -1,7 +1,7 @@
 package com.kecoyo.turtlebase.controller;
 
 import com.kecoyo.turtlebase.common.web.ResponseResult;
-import com.kecoyo.turtlebase.domain.dto.SmsDto;
+import com.kecoyo.turtlebase.dto.SmsDto;
 import com.kecoyo.turtlebase.service.SmsService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
