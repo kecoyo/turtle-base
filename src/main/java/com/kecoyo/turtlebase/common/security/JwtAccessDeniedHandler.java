@@ -8,7 +8,7 @@ import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.kecoyo.turtlebase.common.web.ApiError;
+import com.kecoyo.turtlebase.common.web.ResponseResult;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,9 +20,8 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
     public void handle(HttpServletRequest request, HttpServletResponse response,
             AccessDeniedException accessDeniedException) throws IOException {
 
-        ApiError apiError = ApiError.error(HttpStatus.FORBIDDEN.value(), "无权访问请求的资源");
-        Integer code = apiError.getStatus();
-        String message = JSON.toJSONString(apiError);
+        Integer code = HttpStatus.FORBIDDEN.value();
+        String message = JSON.toJSONString(ResponseResult.fail(code, "无权访问请求的资源"));
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(code);

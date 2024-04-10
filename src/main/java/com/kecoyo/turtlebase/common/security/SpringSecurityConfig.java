@@ -42,10 +42,11 @@ public class SpringSecurityConfig {
     public WebSecurityCustomizer webSecurityCustomizer() {
         // web.ignoring() 通常仅用于提供静态内容
         return (web) -> web.ignoring().requestMatchers(
-            "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",// swagger
-            "/api/auth/**",
-            "/api/area/**"
-        );
+                // swagger
+                "/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**",
+                // others
+                "/api/auth/login", "/api/auth/logout", "/api/auth/refreshToken", "/api/auth/register",
+                "/api/area/**");
     }
 
     /**
@@ -88,15 +89,17 @@ public class SpringSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
-            .cors(cors -> cors.disable())
-            .httpBasic(httpBasic -> httpBasic.disable())
-            .formLogin(formLogin -> formLogin.disable())
-            .logout(logout -> logout.disable())
-            .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
-            .exceptionHandling((exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint).accessDeniedHandler(jwtAccessDeniedHandler))
-            .userDetailsService(userDetailsService)
-            .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable())
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .formLogin(formLogin -> formLogin.disable())
+                .logout(logout -> logout.disable())
+                .authorizeHttpRequests((authorize) -> authorize.anyRequest().authenticated())
+                .exceptionHandling(
+                        (exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                                .accessDeniedHandler(jwtAccessDeniedHandler))
+                .userDetailsService(userDetailsService)
+                .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }

@@ -13,7 +13,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.kecoyo.turtlebase.common.security.bean.JwtProperties;
 import com.kecoyo.turtlebase.common.utils.JwtUtils;
 
 import cn.hutool.core.util.StrUtil;

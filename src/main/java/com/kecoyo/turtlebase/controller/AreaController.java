@@ -20,7 +20,6 @@ public class AreaController {
     @Autowired
     private AreaService areaService;
 
-
     @Operation(summary = "获取所有区域")
     @GetMapping("/getAllAreas")
     public ResponseResult<List<Area>> getAllAreas() {

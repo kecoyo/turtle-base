@@ -37,9 +37,6 @@ public class User implements Serializable {
     @Schema(description = "用户性别")
     private Integer gender;
 
-    @Schema(description = "用户生日")
-    private String birthday;
-
     @Schema(description = "用户邮箱")
     private String email;
 

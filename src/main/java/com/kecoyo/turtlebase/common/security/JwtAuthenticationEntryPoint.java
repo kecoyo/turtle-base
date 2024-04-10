@@ -8,7 +8,7 @@ import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
 
 import com.alibaba.fastjson.JSON;
-import com.kecoyo.turtlebase.common.web.ApiError;
+import com.kecoyo.turtlebase.common.web.ResponseResult;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -20,9 +20,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     public void commence(HttpServletRequest request, HttpServletResponse response,
             AuthenticationException authException) throws IOException {
 
-        ApiError apiError = ApiError.error(HttpStatus.UNAUTHORIZED.value(), "当前登录状态过期");
-        Integer code = apiError.getStatus();
-        String message = JSON.toJSONString(apiError);
+        Integer code = HttpStatus.UNAUTHORIZED.value();
+        String message = JSON.toJSONString(ResponseResult.fail(code, "当前登录状态过期"));
 
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(code);

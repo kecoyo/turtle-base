@@ -16,6 +16,10 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import com.alibaba.fastjson.support.spring.FastJsonRedisSerializer;
 import com.alibaba.fastjson.support.spring.GenericFastJsonRedisSerializer;
 
+/**
+ * Redis配置
+ */
+
 @Configuration
 @EnableCaching
 @EnableConfigurationProperties(RedisProperties.class)

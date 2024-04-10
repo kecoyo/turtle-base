@@ -1,6 +1,6 @@
 package com.kecoyo.turtlebase.common.security;
 
-import com.kecoyo.turtlebase.common.dto.JwtUserDto;
+import com.kecoyo.turtlebase.common.security.dto.JwtUserDto;
 import com.kecoyo.turtlebase.common.utils.RedisUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,6 @@ public class UserCacheManager {
      */
     public JwtUserDto getUserCache(String userName) {
         if (StringUtils.isNotEmpty(userName)) {
-            String cacheKey = "user-login-cache:";
             // 获取数据
             Object obj = redisUtils.get(cacheKey + userName);
             if (obj != null) {

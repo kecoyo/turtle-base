@@ -17,6 +17,10 @@ import io.swagger.v3.oas.models.security.SecurityRequirement;
 import io.swagger.v3.oas.models.security.SecurityScheme;
 import io.swagger.v3.oas.models.servers.Server;
 
+/**
+ * Swagger3.0配置
+ */
+
 @Configuration
 public class SpringDocConfig {
 

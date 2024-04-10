@@ -1,17 +1,17 @@
 package com.kecoyo.turtlebase.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.kecoyo.turtlebase.common.dto.JwtUserDto;
+import com.kecoyo.turtlebase.common.security.dto.LoginUserDto;
 import com.kecoyo.turtlebase.model.User;
 
 public interface AuthService extends IService<User> {
 
-    JwtUserDto login(String username, String password);
+    LoginUserDto login(String username, String password);
 
-    JwtUserDto tokenLogin(String token);
+    LoginUserDto tokenLogin(String token);
 
-    JwtUserDto wxMiniLogin(Integer appId, String code);
+    LoginUserDto wxMiniLogin(Integer appId, String code);
 
-    JwtUserDto wxOauthLogin(Integer appId, String code);
+    LoginUserDto wxOauthLogin(Integer appId, String code);
 
 }
