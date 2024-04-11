@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.common.utils;
+package com.kecoyo.turtlebase.common.redis;
 
 import java.util.ArrayList;
 import java.util.HashSet;
