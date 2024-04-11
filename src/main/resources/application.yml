@@ -1,7 +1,5 @@
 server:
   port: 8080
-  # servlet:
-  #   context-path: /api
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
@@ -9,7 +7,6 @@ server:
 spring:
   application:
     name: turtle-base
-  context-path: /api
   profiles:
     active: dev
   jackson:
@@ -28,6 +25,24 @@ spring:
       password: 123456
       database: 0 #数据库索引
       timeout: 5000 #连接超时时间
+      lettuce:
+        pool:
+          # 连接池最大连接数 默认8 ，负数表示没有限制
+          max-active: 8
+          # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认-1
+          max-wait: -1
+          # 连接池中的最大空闲连接 默认8
+          max-idle: 8
+          # 连接池中的最小空闲连接 默认0
+          min-idle: 0
+  cache:
+    # 缓存类型 redis、none(不使用缓存)
+    type: redis
+    # 缓存时间(单位：ms)
+    redis:
+      time-to-live: 3600000
+      # 缓存null值，防止缓存穿透
+      cache-null-values: true
 
 mybatis-plus:
   configuration:
@@ -57,26 +72,3 @@ aliyun:
 springdoc:
   swagger-ui:
     enabled: true
-
-jwt:
-  header: Authorization
-  # 令牌前缀
-  token-start-with: Bearer
-  # 必须使用最少88位的Base64对该令牌进行编码
-  base64-secret: ZmQ0ZGI5NjQ0MDQwY2I4MjMxY2Y3ZmI3MjdhN2ZmMjNhODViOTg1ZGE0NTBjMGM4NDA5NzYxMjdjOWMwYWRmZTBlZjlhNGY3ZTg4Y2U3YTE1ODVkZDU5Y2Y3OGYwZWE1NzUzNWQ2YjFjZDc0NGMxZWU2MmQ3MjY1NzJmNTE0MzI=
-  # 令牌过期时间 此处单位/毫秒 ，默认2小时，可在此网站生成 https://www.convertworld.com/zh-hans/time/milliseconds.html
-  token-validity-in-seconds: 7200000
-  # 在线用户key
-  online-key: "online-token:"
-  # 验证码
-  code-key: "captcha-code:"
-  # token 续期检查时间范围（默认30分钟，单位默认毫秒），在token即将过期的一段时间内用户操作了，则给用户的token续期
-  detect: 1800000
-  # 续期时间范围，默认 1小时，这里单位毫秒
-  renew: 3600000
-
-login:
-  user-cache:
-    key: "user-login-cache:"
-    # 存活时间/秒
-    idle-time: 21600
