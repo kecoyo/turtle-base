@@ -12,16 +12,17 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.kecoyo.turtlebase.common.dto.JwtUserDto;
 import com.kecoyo.turtlebase.common.exception.BadRequestException;
+import com.kecoyo.turtlebase.common.security.JwtProperties;
 import com.kecoyo.turtlebase.common.security.TokenProvider;
-import com.kecoyo.turtlebase.common.security.bean.SecurityProperties;
+import com.kecoyo.turtlebase.common.security.dto.JwtUserDto;
+import com.kecoyo.turtlebase.common.security.dto.LoginUserDto;
 import com.kecoyo.turtlebase.common.utils.HttpClientResult;
 import com.kecoyo.turtlebase.common.utils.HttpClientUtils;
+import com.kecoyo.turtlebase.mapper.UserMapper;
 import com.kecoyo.turtlebase.model.App;
 import com.kecoyo.turtlebase.model.User;
 import com.kecoyo.turtlebase.model.UserBind;
-import com.kecoyo.turtlebase.mapper.UserMapper;
 import com.kecoyo.turtlebase.service.AppService;
 import com.kecoyo.turtlebase.service.AuthService;
 import com.kecoyo.turtlebase.service.UserBindService;
@@ -37,7 +38,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements Au
     private TokenProvider tokenProvider;
 
     @Autowired
-    private SecurityProperties properties;
+    private JwtProperties jwtProperties;
 
     @Autowired
     private UserDetailsService userDetailsService;
@@ -52,24 +53,24 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements Au
     private UserBindService userBindService;
 
     @Override
-    public JwtUserDto login(String username, String password) {
+    public LoginUserDto login(String username, String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
-            username, password);
+                username, password);
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         JwtUserDto jwtUserDto = (JwtUserDto) authentication.getPrincipal();
         String token = tokenProvider.createToken(authentication);
-        jwtUserDto.setToken(properties.getTokenStartWith() + token);
+        jwtUserDto.setToken(jwtProperties.getTokenStartWith() + token);
 
         return jwtUserDto;
     }
 
     @Override
-    public JwtUserDto tokenLogin(String token) {
+    public LoginUserDto tokenLogin(String token) {
         UserDetails userDetails = userDetailsService.loadUserByUsername("admin");
         Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
-            userDetails.getAuthorities());
+                userDetails.getAuthorities());
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
         String token2 = tokenProvider.createToken(authentication);
@@ -79,16 +80,16 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements Au
     }
 
     @Override
-    public JwtUserDto wxMiniLogin(Integer appId, String code) {
+    public LoginUserDto wxMiniLogin(Integer appId, String code) {
         // 获取应用配置, 默认不存在会抛出异常
         App appInfo = appService.getById(appId, true);
 
         // 登录凭证校验
         String url = String.format(
-            "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code",
-            appInfo.getWechatAppId(),
-            appInfo.getWechatAppSecret(),
-            code);
+                "https://api.weixin.qq.com/sns/jscode2session?appid=%s&secret=%s&js_code=%s&grant_type=authorization_code",
+                appInfo.getWechatAppId(),
+                appInfo.getWechatAppSecret(),
+                code);
 
         String openid = null;
 
@@ -134,7 +135,7 @@ public class AuthServiceImpl extends ServiceImpl<UserMapper, User> implements Au
     }
 
     @Override
-    public JwtUserDto wxOauthLogin(Integer appId, String code) {
+    public LoginUserDto wxOauthLogin(Integer appId, String code) {
         throw new UnsupportedOperationException("Unimplemented method 'wxOauthLogin'");
     }
 

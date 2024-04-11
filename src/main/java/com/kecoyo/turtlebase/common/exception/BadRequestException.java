@@ -1,8 +1,7 @@
 package com.kecoyo.turtlebase.common.exception;
 
-import lombok.Getter;
 import org.springframework.http.HttpStatus;
-import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import lombok.Getter;
 
 /**
  * 统一异常处理
@@ -10,7 +9,7 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @Getter
 public class BadRequestException extends RuntimeException {
 
-    private Integer status = BAD_REQUEST.value();
+    private Integer status = HttpStatus.BAD_REQUEST.value();
 
     public BadRequestException(String message) {
         super(message);

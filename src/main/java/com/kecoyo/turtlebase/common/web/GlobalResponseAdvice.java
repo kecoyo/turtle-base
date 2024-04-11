@@ -1,5 +1,6 @@
 package com.kecoyo.turtlebase.common.web;
 
+import com.alibaba.fastjson.JSONObject;
 import org.springframework.core.MethodParameter;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -26,15 +27,12 @@ public class GlobalResponseAdvice implements ResponseBodyAdvice<Object> {
 
     @Override
     @Nullable
-    public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType,
-            Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request,
-            ServerHttpResponse response) {
+    public Object beforeBodyWrite(@Nullable Object body, MethodParameter returnType, MediaType selectedContentType, Class<? extends HttpMessageConverter<?>> selectedConverterType, ServerHttpRequest request, ServerHttpResponse response) {
         if (body != null) {
             if (body instanceof ResponseResult) {
                 return body;
-            } else if (body instanceof ApiError) {
-                ApiError error = (ApiError) body;
-                return ResponseResult.fail(error.getStatus(), error.getMessage());
+            } else if (body instanceof String) {
+                return JSONObject.toJSONString(ResponseResult.success(body));
             }
         }
         return ResponseResult.success(body);

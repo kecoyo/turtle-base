@@ -12,7 +12,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Component;
 
-import com.kecoyo.turtlebase.common.security.bean.SecurityProperties;
 import com.kecoyo.turtlebase.common.utils.RedisUtils;
 
 import cn.hutool.core.date.DateField;
@@ -37,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 public class TokenProvider implements InitializingBean {
 
     @Autowired
-    private SecurityProperties properties;
+    private JwtProperties jwtProperties;
 
     @Autowired
     private RedisUtils redisUtils;
@@ -46,14 +45,9 @@ public class TokenProvider implements InitializingBean {
     private JwtParser jwtParser;
     private JwtBuilder jwtBuilder;
 
-    public TokenProvider(SecurityProperties properties, RedisUtils redisUtils) {
-        this.properties = properties;
-        this.redisUtils = redisUtils;
-    }
-
     @Override
     public void afterPropertiesSet() {
-        byte[] keyBytes = Decoders.BASE64.decode(properties.getBase64Secret());
+        byte[] keyBytes = Decoders.BASE64.decode(jwtProperties.getBase64Secret());
         Key key = Keys.hmacShaKeyFor(keyBytes);
         jwtParser = Jwts.parserBuilder().setSigningKey(key).build();
         jwtBuilder = Jwts.builder().signWith(key, SignatureAlgorithm.HS512);
@@ -111,15 +105,15 @@ public class TokenProvider implements InitializingBean {
         // 判断当前时间与过期时间的时间差
         long differ = expireDate.getTime() - System.currentTimeMillis();
         // 如果在续期检查的范围内，则续期
-        if (differ <= properties.getDetect()) {
-            long renew = time + properties.getRenew();
+        if (differ <= jwtProperties.getDetect()) {
+            long renew = time + jwtProperties.getRenew();
             redisUtils.expire(loginKey, renew, TimeUnit.MILLISECONDS);
         }
     }
 
     public String getToken(HttpServletRequest request) {
-        final String requestHeader = request.getHeader(properties.getHeader());
-        if (requestHeader != null && requestHeader.startsWith(properties.getTokenStartWith())) {
+        final String requestHeader = request.getHeader(jwtProperties.getHeader());
+        if (requestHeader != null && requestHeader.startsWith(jwtProperties.getTokenStartWith())) {
             return requestHeader.substring(7);
         }
         return null;
@@ -134,6 +128,6 @@ public class TokenProvider implements InitializingBean {
     public String loginKey(String token) {
         Claims claims = getClaims(token);
         String md5Token = DigestUtil.md5Hex(token);
-        return properties.getOnlineKey() + claims.getSubject() + "-" + md5Token;
+        return jwtProperties.getOnlineKey() + claims.getSubject() + "-" + md5Token;
     }
 }

@@ -6,6 +6,9 @@ import org.springframework.context.annotation.Configuration;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Jackson配置
+ */
 @Configuration
 public class JacksonConfig {
     @Bean

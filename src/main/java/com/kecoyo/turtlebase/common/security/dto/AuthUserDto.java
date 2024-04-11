@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.common.dto;
+package com.kecoyo.turtlebase.common.security.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.Data;

@@ -2,7 +2,6 @@ package com.kecoyo.turtlebase.common.utils;
 
 import java.util.List;
 
-import com.kecoyo.turtlebase.common.dto.JwtUserDto;
 import com.kecoyo.turtlebase.common.exception.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
@@ -11,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.alibaba.fastjson.JSONObject;
 import com.kecoyo.turtlebase.common.security.LoginUserDetails;
+import com.kecoyo.turtlebase.common.security.dto.JwtUserDto;
 
 import lombok.extern.slf4j.Slf4j;
 

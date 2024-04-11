@@ -1,4 +1,7 @@
-package com.kecoyo.turtlebase.common.security.bean;
+package com.kecoyo.turtlebase.common.security;
+
+import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
@@ -6,6 +9,8 @@ import lombok.Data;
  * Jwt参数配置
  */
 @Data
+@Component
+@ConfigurationProperties(prefix = "jwt")
 public class JwtProperties {
 
     /**

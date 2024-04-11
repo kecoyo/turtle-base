@@ -1,5 +1,6 @@
 package com.kecoyo.turtlebase.common.web;
 
+
 import java.io.Serializable;
 
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class ResponseResult<T> implements Serializable {
 
-    /** 消息状态码 */
+    /**
+     * 消息状态码
+     */
     private int code;
-    /** 消息内容 */
+    /**
+     * 消息内容
+     */
     private String msg;
-    /** 消息数据 */
+    /**
+     * 消息数据
+     */
     private T data;
 
     public ResponseResult(HttpStatus httpStatus) {

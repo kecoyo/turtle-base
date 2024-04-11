@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.common.dto;
+package com.kecoyo.turtlebase.common.security.dto;
 
 import java.util.List;
 import java.util.Set;
@@ -6,6 +6,8 @@ import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.kecoyo.turtlebase.dto.UserLoginDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,25 +18,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 public class JwtUserDto implements UserDetails {
 
-    private Integer id;
-
-    private String username;
-
-    private String password;
-
-    private String name;
-
-    private String phone;
-
-    private String email;
-
-    private String avatar;
-
-    private Integer gender;
-
-    private String birthday;
-
-    private String token;
+    private final UserLoginDto user;
 
     private List<Long> dataScopes;
 
