@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.common.config;
+package com.kecoyo.turtlebase.common.mybatis;
 
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Configuration;

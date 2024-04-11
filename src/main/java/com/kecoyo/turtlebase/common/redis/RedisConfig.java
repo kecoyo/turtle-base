@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.common.config;
+package com.kecoyo.turtlebase.common.redis;
 
 import java.time.Duration;
 

@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.common.config;
+package com.kecoyo.turtlebase.common.swagger;
 
 import java.util.ArrayList;
 import java.util.HashMap;
