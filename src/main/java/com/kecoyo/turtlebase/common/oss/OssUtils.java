@@ -5,17 +5,21 @@ import java.io.File;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.aliyun.oss.OSS;
-import com.aliyun.oss.OSSClientBuilder;
+import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.GetObjectRequest;
 
 import cn.hutool.core.io.FileUtil;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Component
-public class OssServiceImpl {
+public class OssUtils {
 
     @Autowired
     private OssProperties ossProperties;
+
+    @Autowired
+    private OSSClient ossClient;
 
     /**
      * 从OSS上下载文件到本地文件系统
@@ -26,23 +30,15 @@ public class OssServiceImpl {
     public void downloadFile(String objectName, String localFilePath) {
         // 确保下载文件目录存在
         FileUtil.mkParentDirs(localFilePath);
-        // 创建OSSClient实例
-        String endpoint = ossProperties.getInternal() ? ossProperties.getInternalEndpoint()
-                : ossProperties.getEndpoint();
-        OSS ossClient = new OSSClientBuilder().build(endpoint, ossProperties.getAccessKeyId(),
-                ossProperties.getAccessKeySecret());
         try {
             // 从OSS上下载文件到本地文件系统
             ossClient.getObject(new GetObjectRequest(ossProperties.getBucketName(), objectName),
                     new File(localFilePath));
 
-            System.out.println("文件下载成功！");
+            log.debug("文件下载成功！");
         } catch (Exception e) {
-            System.err.println("文件下载失败：" + e.getMessage());
+            log.error("文件下载失败：" + e.getMessage(), e);
             throw e;
-        } finally {
-            // 关闭OSSClient实例以释放资源
-            ossClient.shutdown();
         }
     }
 
@@ -53,18 +49,12 @@ public class OssServiceImpl {
      * @param localFilePath
      */
     public void uploadFile(String objectName, String localFilePath) {
-        // 创建OSSClient实例
-        String endpoint = ossProperties.getInternal() ? ossProperties.getInternalEndpoint()
-                : ossProperties.getEndpoint();
-        OSS ossClient = new OSSClientBuilder().build(endpoint, ossProperties.getAccessKeyId(),
-                ossProperties.getAccessKeySecret());
         try {
             ossClient.putObject(ossProperties.getBucketName(), objectName, new File(localFilePath));
+            log.debug("文件上传成功！");
         } catch (Exception e) {
-            System.out.println("文件上传失败：" + e.getMessage());
+            log.error("文件上传失败：" + e.getMessage(), e);
             throw e;
-        } finally {
-            ossClient.shutdown();
         }
     }
 

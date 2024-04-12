@@ -11,4 +11,6 @@ public interface UserService extends IService<User> {
 
     User findByUsername(String username);
 
+    void downloadFile();
+
 }

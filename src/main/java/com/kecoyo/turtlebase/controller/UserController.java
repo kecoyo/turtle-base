@@ -40,4 +40,13 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
+    /**
+     * 下载oss文件
+     */
+    @RequestMapping("/download")
+    public ResponseEntity<String> download() {
+        userService.downloadFile();
+        return ResponseEntity.ok("下载成功！");
+    }
+
 }
