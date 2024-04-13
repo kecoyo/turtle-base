@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.domain.model;
+package com.kecoyo.turtlebase.model;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;

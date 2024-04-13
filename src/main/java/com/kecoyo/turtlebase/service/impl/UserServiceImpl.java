@@ -11,8 +11,8 @@ import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kecoyo.turtlebase.common.oss.OssUtils;
 import com.kecoyo.turtlebase.common.redis.RedisUtils;
-import com.kecoyo.turtlebase.domain.model.User;
 import com.kecoyo.turtlebase.mapper.UserMapper;
+import com.kecoyo.turtlebase.model.User;
 import com.kecoyo.turtlebase.service.UserService;
 
 @Service
