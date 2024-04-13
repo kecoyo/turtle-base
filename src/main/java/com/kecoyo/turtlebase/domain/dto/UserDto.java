@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.dto;
+package com.kecoyo.turtlebase.domain.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
