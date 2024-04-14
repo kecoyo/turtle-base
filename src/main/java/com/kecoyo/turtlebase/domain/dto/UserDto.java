@@ -1,9 +1,7 @@
-package com.kecoyo.turtlebase.dto;
+package com.kecoyo.turtlebase.domain.dto;
 
 import java.io.Serializable;
 import java.sql.Timestamp;
-
-import com.alibaba.fastjson.annotation.JSONField;
 
 import lombok.Data;
 
@@ -14,7 +12,6 @@ public class UserDto implements Serializable {
 
     private String username;
 
-    @JSONField(serialize = false)
     private String password;
 
     private String name;
@@ -35,10 +32,8 @@ public class UserDto implements Serializable {
 
     private Timestamp updateAt;
 
-    @JSONField(serialize = false)
     private Integer status;
 
-    @JSONField(serialize = false)
     private Integer deleted;
 
 }

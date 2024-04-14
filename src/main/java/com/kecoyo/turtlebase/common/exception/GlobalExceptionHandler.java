@@ -4,6 +4,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -84,4 +85,12 @@ public class GlobalExceptionHandler {
         return ResponseEntity.ok(ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
     }
 
+    /**
+     * 用户名或密码错误
+     */
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ResponseResult<Object>> badCredentialsException(BadCredentialsException e) {
+        log.error(ThrowableUtil.getStackTrace(e));
+        return ResponseEntity.ok(ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
+    }
 }
