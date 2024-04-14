@@ -21,9 +21,9 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("/user")
-@Tag(name = "用户")
-public class UserController {
+@RequestMapping("/onlineUser")
+@Tag(name = "在线用户")
+public class OnlineUserController {
 
     @Autowired
     private UserService userService;

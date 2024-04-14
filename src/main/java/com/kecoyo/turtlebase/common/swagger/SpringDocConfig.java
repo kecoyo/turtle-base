@@ -25,7 +25,7 @@ import io.swagger.v3.oas.models.servers.Server;
 public class SpringDocConfig {
 
     @Bean
-    public OpenAPI customOpenAPI() {
+    public OpenAPI openAPI() {
 
         // 联系人信息(contact)，构建API的联系人信息，用于描述API开发者的联系信息，包括名称、URL、邮箱等
         Contact contact = new Contact()
@@ -65,9 +65,10 @@ public class SpringDocConfig {
 
         return new OpenAPI()
                 .info(info)
-                .servers(servers)
-                .components(new Components().addSecuritySchemes("authScheme", securityScheme)) // 添加鉴权组件
-                .addSecurityItem(new SecurityRequirement().addList("authScheme")) // 全部添加鉴权小锁
+                // .servers(servers)
+                // .components(new Components().addSecuritySchemes("authScheme",
+                // securityScheme)) // 添加鉴权组件
+                // .addSecurityItem(new SecurityRequirement().addList("authScheme")) // 全部添加鉴权小锁
                 .externalDocs(new ExternalDocumentation()); // 配置Swagger3.0描述信息
 
     }

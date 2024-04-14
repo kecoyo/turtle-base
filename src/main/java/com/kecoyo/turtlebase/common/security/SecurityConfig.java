@@ -41,7 +41,8 @@ public class SecurityConfig {
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         // web.ignoring() 通常仅用于提供静态内容
-        return (web) -> web.ignoring().requestMatchers("/swagger-ui/**", "/swagger-resources/**", "/v3/api-docs/**");
+        return (web) -> web.ignoring().requestMatchers("/swagger-ui/**", "/swagger-resources/**",
+                "/api-docs/**", "/v3/api-docs/**");
     }
 
     /**
@@ -90,7 +91,7 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin.disable())
                 .logout(logout -> logout.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/user/login").permitAll()
+                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(
                         (exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint)

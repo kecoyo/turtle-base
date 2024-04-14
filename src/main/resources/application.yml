@@ -1,5 +1,7 @@
 server:
   port: 8080
+  # servlet:
+  #   context-path: /test-api
   compression:
     enabled: true
     mime-types: text/html,text/xml,text/plain,text/css,text/javascript,application/javascript,application/json
@@ -43,6 +45,9 @@ spring:
       time-to-live: 3600000
       # 缓存null值，防止缓存穿透
       cache-null-values: true
+  devtools:
+    restart:
+      enabled: false
 
 mybatis-plus:
   configuration:
@@ -70,8 +75,14 @@ aliyun:
     domain: https://lj********re.oss-cn-beijing.aliyuncs.com
 
 springdoc:
-  swagger-ui:
+  api-docs:
+    # 是否开启接口文档
     enabled: true
+  swagger-ui:
+    # 是否开启Swagger UI
+    enabled: true
+    # 持久化认证数据，如果设置为 true，它会保留授权数据并且不会在浏览器关闭/刷新时丢失
+    persistAuthorization: true
 
 jwt:
   header: Authorization
