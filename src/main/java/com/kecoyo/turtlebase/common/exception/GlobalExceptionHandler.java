@@ -22,40 +22,40 @@ import lombok.extern.slf4j.Slf4j;
  */
 
 @Slf4j
-// @RestControllerAdvice
+@RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
      * 处理所有不可知的异常
      */
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ResponseResult<Object>> handleException(Exception e) {
+    public ResponseResult<Object> handleException(Exception e) {
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
-        return ResponseEntity.ok(ResponseResult.fail(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage()));
+        return ResponseResult.fail(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
     }
 
     /**
      * 处理自定义异常
      */
     @ExceptionHandler(value = BadRequestException.class)
-    public ResponseEntity<ResponseResult<Object>> badRequestException(BadRequestException e) {
+    public ResponseResult<Object> badRequestException(BadRequestException e) {
         log.error(ThrowableUtil.getStackTrace(e));
-        return ResponseEntity.ok(ResponseResult.fail(e.getStatus(), e.getMessage()));
+        return ResponseResult.fail(e.getStatus(), e.getMessage());
     }
 
     // 数据库操作异常
     @ExceptionHandler(DataAccessException.class)
-    public ResponseEntity<ResponseResult<Object>> handleDataAccessException(DataAccessException e) {
+    public ResponseResult<Object> handleDataAccessException(DataAccessException e) {
         log.error(ThrowableUtil.getStackTrace(e));
-        return ResponseEntity.ok(ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getCause().getMessage()));
+        return ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getCause().getMessage());
     }
 
     /**
      * 处理所有接口数据验证异常
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ResponseResult<Object>> handleMethodArgumentNotValidException(
+    public ResponseResult<Object> handleMethodArgumentNotValidException(
             MethodArgumentNotValidException e) {
         // 打印堆栈信息
         log.error(ThrowableUtil.getStackTrace(e));
@@ -64,33 +64,33 @@ public class GlobalExceptionHandler {
         if (objectError instanceof FieldError) {
             message = ((FieldError) objectError).getField() + ": " + message;
         }
-        return ResponseEntity.ok(ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), message));
+        return ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), message);
     }
 
     /**
      * 处理所有接口数据验证异常
      */
     @ExceptionHandler(HandlerMethodValidationException.class)
-    public ResponseEntity<ResponseResult<Object>> handleHandlerMethodValidationException(
+    public ResponseResult<Object> handleHandlerMethodValidationException(
             HandlerMethodValidationException e) {
         log.error(ThrowableUtil.getStackTrace(e));
-        return ResponseEntity.ok(ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
+        return ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
     // 参数解析异常
     @ExceptionHandler(HttpMessageNotReadableException.class)
-    public ResponseEntity<ResponseResult<Object>> handleHttpMessageNotReadableException(
+    public ResponseResult<Object> handleHttpMessageNotReadableException(
             HttpMessageNotReadableException e) {
         log.error(ThrowableUtil.getStackTrace(e));
-        return ResponseEntity.ok(ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
+        return ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
     /**
      * 用户名或密码错误
      */
     @ExceptionHandler(BadCredentialsException.class)
-    public ResponseEntity<ResponseResult<Object>> badCredentialsException(BadCredentialsException e) {
+    public ResponseResult<Object> badCredentialsException(BadCredentialsException e) {
         log.error(ThrowableUtil.getStackTrace(e));
-        return ResponseEntity.ok(ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage()));
+        return ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 }

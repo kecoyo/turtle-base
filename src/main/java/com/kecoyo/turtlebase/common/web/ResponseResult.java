@@ -1,6 +1,5 @@
 package com.kecoyo.turtlebase.common.web;
 
-
 import java.io.Serializable;
 
 import org.springframework.http.HttpStatus;

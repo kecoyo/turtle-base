@@ -91,7 +91,8 @@ public class SecurityConfig {
                 .formLogin(formLogin -> formLogin.disable())
                 .logout(logout -> logout.disable())
                 .authorizeHttpRequests((authorize) -> authorize
-                        .requestMatchers("/**").permitAll()
+                        .requestMatchers("/user/login").permitAll()
+                        .requestMatchers("/user/test").permitAll()
                         .anyRequest().authenticated())
                 .exceptionHandling(
                         (exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint)

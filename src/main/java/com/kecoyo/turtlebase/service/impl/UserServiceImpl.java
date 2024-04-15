@@ -8,22 +8,21 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.kecoyo.turtlebase.common.redis.RedisUtils;
 import com.kecoyo.turtlebase.common.security.JwtProperties;
+import com.kecoyo.turtlebase.common.security.LoginUserDetails;
 import com.kecoyo.turtlebase.common.security.TokenProvider;
-import com.kecoyo.turtlebase.common.security.dto.JwtUserDto;
-import com.kecoyo.turtlebase.domain.User;
-import com.kecoyo.turtlebase.domain.dto.UserLoginDto;
-import com.kecoyo.turtlebase.domain.vo.UserLoginVo;
+import com.kecoyo.turtlebase.dto.UserLoginDto;
 import com.kecoyo.turtlebase.mapper.UserMapper;
+import com.kecoyo.turtlebase.model.User;
 import com.kecoyo.turtlebase.service.UserService;
 import com.kecoyo.turtlebase.service.mapstruct.UserMapstruct;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -49,24 +48,16 @@ public class UserServiceImpl extends ServiceImpl<UserMapper, User> implements Us
     private OnlineUserServiceImpl onlineUserService;
 
     @Override
-    public UserLoginVo login(UserLoginDto dto, HttpServletRequest request) {
+    public UserDetails login(UserLoginDto dto) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 dto.getUsername(), dto.getPassword());
         Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        String token = tokenProvider.createToken(authentication);
-        JwtUserDto jwtUserDto = (JwtUserDto) authentication.getPrincipal();
-        log.info("principal: {}", jwtUserDto);
+        LoginUserDetails userDetails = (LoginUserDetails) authentication.getPrincipal();
+        log.info("userDetails: {}", userDetails);
 
-        UserLoginVo userLoginVo = new UserLoginVo();
-        BeanUtils.copyProperties(jwtUserDto.getUser(), userLoginVo);
-        userLoginVo.setToken(jwtProperties.getTokenStartWith() + token);
-
-        // 保存在线信息
-        onlineUserService.save(jwtUserDto, token, request);
-
-        return userLoginVo;
+        return userDetails;
     }
 
     @Override

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.kecoyo.turtlebase.domain.User;
-import com.kecoyo.turtlebase.domain.dto.UserLoginDto;
-import com.kecoyo.turtlebase.domain.vo.UserLoginVo;
+import com.kecoyo.turtlebase.dto.UserLoginDto;
+import com.kecoyo.turtlebase.model.User;
 import com.kecoyo.turtlebase.service.UserService;
+import com.kecoyo.turtlebase.vo.UserLoginVo;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -31,7 +31,7 @@ public class OnlineUserController {
     @Operation(summary = "用户登录")
     @PostMapping("/login")
     public ResponseEntity<UserLoginVo> login(@Validated @RequestBody UserLoginDto dto, HttpServletRequest request) {
-        UserLoginVo result = userService.login(dto, null);
+        UserLoginVo result = userService.login(dto);
         return ResponseEntity.ok(result);
     }
 

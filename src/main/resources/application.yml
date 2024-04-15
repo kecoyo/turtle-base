@@ -47,7 +47,11 @@ spring:
       cache-null-values: true
   devtools:
     restart:
-      enabled: false
+      enabled: true
+      include:
+        include:
+          com-company-core: /com-company-core-[\\w\\d-\\.]+\\.jar
+          com-company-module: /com-company-module-[\\w\\d-\\.]+\\.jar
 
 mybatis-plus:
   configuration:
@@ -103,6 +107,8 @@ jwt:
 
 login:
   user-cache:
+    enabled: false
+    #
     key: "user-login-cache:"
     # 存活时间/秒
     idle-time: 21600

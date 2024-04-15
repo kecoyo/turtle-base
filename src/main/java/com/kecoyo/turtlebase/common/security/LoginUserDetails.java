@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.common.security.dto;
+package com.kecoyo.turtlebase.common.security;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.kecoyo.turtlebase.domain.User;
+import com.kecoyo.turtlebase.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,11 +15,11 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class JwtUserDto implements UserDetails {
+public class LoginUserDetails implements UserDetails {
 
     private User user;
 
-    private List<Long> dataScopes;
+    private List<Integer> dataScopes;
 
     private List<GrantedAuthority> authorities;
 

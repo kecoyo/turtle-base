@@ -2,16 +2,15 @@ package com.kecoyo.turtlebase.service;
 
 import java.util.List;
 
-import com.baomidou.mybatisplus.extension.service.IService;
-import com.kecoyo.turtlebase.domain.User;
-import com.kecoyo.turtlebase.domain.dto.UserLoginDto;
-import com.kecoyo.turtlebase.domain.vo.UserLoginVo;
+import org.springframework.security.core.userdetails.UserDetails;
 
-import jakarta.servlet.http.HttpServletRequest;
+import com.baomidou.mybatisplus.extension.service.IService;
+import com.kecoyo.turtlebase.dto.UserLoginDto;
+import com.kecoyo.turtlebase.model.User;
 
 public interface UserService extends IService<User> {
 
-    UserLoginVo login(UserLoginDto dto, HttpServletRequest request);
+    UserDetails login(UserLoginDto dto);
 
     User getByUsername(String username);
 

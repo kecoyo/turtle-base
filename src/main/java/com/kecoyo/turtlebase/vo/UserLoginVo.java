@@ -1,4 +1,4 @@
-package com.kecoyo.turtlebase.domain.vo;
+package com.kecoyo.turtlebase.vo;
 
 import java.io.Serializable;
 

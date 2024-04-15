@@ -8,7 +8,6 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import com.kecoyo.turtlebase.common.redis.RedisUtils;
-import com.kecoyo.turtlebase.common.security.dto.JwtUserDto;
 
 import cn.hutool.core.util.RandomUtil;
 
@@ -17,6 +16,9 @@ import cn.hutool.core.util.RandomUtil;
  **/
 @Component
 public class UserCacheManager {
+
+    @Value("${login.user-cache.enabled}")
+    private Boolean enabled;
 
     @Value("${login.user-cache.key}")
     private String cacheKey;
@@ -33,15 +35,12 @@ public class UserCacheManager {
      * @param userName 用户名
      * @return JwtUserDto
      */
-    public JwtUserDto getUserCache(String userName) {
-        if (StringUtils.isNotEmpty(userName)) {
+    public LoginUserDetails getUserCache(String userName) {
+        if (enabled && StringUtils.isNotEmpty(userName)) {
             // 获取数据
             Object obj = redisUtils.get(cacheKey + userName);
             if (obj != null) {
-                JwtUserDto user = new JwtUserDto();
-                BeanUtils.copyProperties(obj, user);
-                return user;
-                // return (JwtUserDto) obj;
+                return (LoginUserDetails) obj;
             }
         }
         return null;
@@ -53,7 +52,7 @@ public class UserCacheManager {
      * @param userName 用户名
      */
     @Async
-    public void addUserCache(String userName, JwtUserDto user) {
+    public void addUserCache(String userName, LoginUserDetails user) {
         if (StringUtils.isNotEmpty(userName)) {
             // 添加数据, 避免数据同时过期
             long time = idleTime + RandomUtil.randomInt(900, 1800);
