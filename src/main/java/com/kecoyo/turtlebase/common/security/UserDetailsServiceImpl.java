@@ -20,19 +20,19 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        LoginUserDetails userDetails = userCacheManager.getUserCache(username);
-        if (userDetails == null) {
+        JwtUserDto jwtUserDto = userCacheManager.getUserCache(username);
+        if (jwtUserDto == null) {
             User user = userService.getByUsername(username);
             if (user == null) {
                 throw new UsernameNotFoundException("用户不存在");
             }
 
-            userDetails = new LoginUserDetails(user, null, null);
+            jwtUserDto = new JwtUserDto(user, null, null);
 
             // 添加缓存数据
-            userCacheManager.addUserCache(username, userDetails);
+            userCacheManager.addUserCache(username, jwtUserDto);
         }
-        return userDetails;
+        return jwtUserDto;
     }
 
 }

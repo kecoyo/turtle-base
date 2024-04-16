@@ -15,7 +15,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginUserDetails implements UserDetails {
+public class JwtUserDto implements UserDetails {
 
     private User user;
 

@@ -1,7 +1,6 @@
 package com.kecoyo.turtlebase.common.security;
 
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Async;
@@ -35,12 +34,12 @@ public class UserCacheManager {
      * @param userName 用户名
      * @return JwtUserDto
      */
-    public LoginUserDetails getUserCache(String userName) {
+    public JwtUserDto getUserCache(String userName) {
         if (enabled && StringUtils.isNotEmpty(userName)) {
             // 获取数据
             Object obj = redisUtils.get(cacheKey + userName);
             if (obj != null) {
-                return (LoginUserDetails) obj;
+                return (JwtUserDto) obj;
             }
         }
         return null;
@@ -52,7 +51,7 @@ public class UserCacheManager {
      * @param userName 用户名
      */
     @Async
-    public void addUserCache(String userName, LoginUserDetails user) {
+    public void addUserCache(String userName, JwtUserDto user) {
         if (StringUtils.isNotEmpty(userName)) {
             // 添加数据, 避免数据同时过期
             long time = idleTime + RandomUtil.randomInt(900, 1800);

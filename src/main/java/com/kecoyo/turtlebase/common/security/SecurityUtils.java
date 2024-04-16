@@ -22,12 +22,12 @@ public class SecurityUtils {
      *
      * @return LoginUserDetails
      */
-    public static LoginUserDetails getCurrentUser() {
+    public static JwtUserDto getCurrentUser() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null) {
             throw new BadRequestException(HttpStatus.UNAUTHORIZED, "当前登录状态过期");
         }
-        return (LoginUserDetails) authentication.getPrincipal();
+        return (JwtUserDto) authentication.getPrincipal();
     }
 
     /**
@@ -41,7 +41,7 @@ public class SecurityUtils {
             throw new BadRequestException(HttpStatus.UNAUTHORIZED.value(), "当前登录状态过期");
         }
         if (authentication.getPrincipal() instanceof UserDetails) {
-            LoginUserDetails userDetails = (LoginUserDetails) authentication.getPrincipal();
+            JwtUserDto userDetails = (JwtUserDto) authentication.getPrincipal();
             return userDetails.getUsername();
         }
         throw new BadRequestException(HttpStatus.UNAUTHORIZED.value(), "找不到当前登录的信息");
@@ -53,7 +53,7 @@ public class SecurityUtils {
      * @return 系统用户ID
      */
     public static Integer getCurrentUserId() {
-        LoginUserDetails userDetails = getCurrentUser();
+        JwtUserDto userDetails = getCurrentUser();
         return userDetails.getUser().getId();
     }
 
@@ -63,7 +63,7 @@ public class SecurityUtils {
      * @return
      */
     public static List<Integer> getCurrentUserDataScope() {
-        LoginUserDetails userDetails = getCurrentUser();
+        JwtUserDto userDetails = getCurrentUser();
         return userDetails.getDataScopes();
     }
 

@@ -1,6 +1,6 @@
 package com.kecoyo.turtlebase.service;
 
-import com.kecoyo.turtlebase.common.security.LoginUserDetails;
+import com.kecoyo.turtlebase.common.security.JwtUserDto;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -13,6 +13,6 @@ public interface OnlineUserService {
      * @param token      /
      * @param request    /
      */
-    public void save(LoginUserDetails jwtUserDto, String token, HttpServletRequest request);
+    public void save(JwtUserDto jwtUserDto, String token, HttpServletRequest request);
 
 }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.kecoyo.turtlebase.common.redis.RedisUtils;
 import com.kecoyo.turtlebase.common.security.JwtProperties;
-import com.kecoyo.turtlebase.common.security.LoginUserDetails;
+import com.kecoyo.turtlebase.common.security.JwtUserDto;
 import com.kecoyo.turtlebase.common.security.TokenProvider;
 import com.kecoyo.turtlebase.common.utils.EncryptUtils;
 import com.kecoyo.turtlebase.dto.OnlineUserDto;
@@ -41,7 +41,7 @@ public class OnlineUserServiceImpl implements OnlineUserService {
      * @param token      /
      * @param request    /
      */
-    public void save(LoginUserDetails jwtUserDto, String token, HttpServletRequest request) {
+    public void save(JwtUserDto jwtUserDto, String token, HttpServletRequest request) {
         // String ip = StringUtils.getIp(request);
         // String browser = StringUtils.getBrowser(request);
         // String address = StringUtils.getCityInfo(ip);

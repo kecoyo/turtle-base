@@ -1,7 +1,6 @@
 package com.kecoyo.turtlebase.dto;
 
 import java.io.Serializable;
-import java.sql.Timestamp;
 
 import lombok.Data;
 
@@ -12,8 +11,6 @@ public class UserDto implements Serializable {
 
     private String username;
 
-    private String password;
-
     private String name;
 
     private String avatar;
@@ -22,18 +19,8 @@ public class UserDto implements Serializable {
 
     private Integer gender;
 
-    private String birthday;
-
     private String email;
 
     private String remark;
-
-    private Timestamp createAt;
-
-    private Timestamp updateAt;
-
-    private Integer status;
-
-    private Integer deleted;
 
 }
