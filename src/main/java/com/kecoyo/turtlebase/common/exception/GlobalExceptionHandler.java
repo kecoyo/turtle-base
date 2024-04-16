@@ -2,8 +2,8 @@ package com.kecoyo.turtlebase.common.exception;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
@@ -49,6 +49,13 @@ public class GlobalExceptionHandler {
     public ResponseResult<Object> handleDataAccessException(DataAccessException e) {
         log.error(ThrowableUtil.getStackTrace(e));
         return ResponseResult.fail(HttpStatus.BAD_REQUEST.value(), e.getCause().getMessage());
+    }
+
+    // 数据库操作异常
+    @ExceptionHandler(AccessDeniedException.class)
+    public ResponseResult<Object> handleAccessDeniedException(AccessDeniedException e) {
+        // log.error(ThrowableUtil.getStackTrace(e));
+        return ResponseResult.fail(HttpStatus.FORBIDDEN.value(), "无权访问请求的资源");
     }
 
     /**

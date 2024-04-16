@@ -93,12 +93,15 @@ public class SecurityConfig {
                 .authorizeHttpRequests((authorize) -> authorize
                         .requestMatchers("/user/login").permitAll()
                         .requestMatchers("/user/test").permitAll()
+                        // .requestMatchers("/user/list").anonymous()
                         .anyRequest().authenticated())
                 .exceptionHandling(
                         (exceptionHandling) -> exceptionHandling.authenticationEntryPoint(jwtAuthenticationEntryPoint)
                                 .accessDeniedHandler(jwtAccessDeniedHandler))
                 .userDetailsService(userDetailsService)
                 .addFilterBefore(jwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
+        // .addFilterBefore(anonymousAccessFilter(),
+        // AnonymousAuthenticationFilter.class);
 
         return http.build();
     }

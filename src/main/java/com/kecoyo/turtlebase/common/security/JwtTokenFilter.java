@@ -57,29 +57,11 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
                 // 生成令牌与第三方系统获取令牌方式
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                Authentication authentication2 = new UsernamePasswordAuthenticationToken(userDetails,
+                Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails,
                         userDetails.getPassword(), userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication2);
+                SecurityContextHolder.getContext().setAuthentication(authentication);
                 // Token 续期
                 // tokenProvider.checkRenewal(token);
-            } else {
-                String username = getUserName(token);
-
-                // 生成令牌与第三方系统获取令牌方式
-                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
-                Authentication authentication2 = new UsernamePasswordAuthenticationToken(userDetails,
-                        userDetails.getPassword(), userDetails.getAuthorities());
-                SecurityContextHolder.getContext().setAuthentication(authentication2);
-
-                // AnonymousAuthenticationToken authentication2 = new
-                // AnonymousAuthenticationToken("anonymous", "anonymous",
-                // AuthorityUtils.createAuthorityList("anonymous"));
-                // SecurityContextHolder.getContext().setAuthentication(authentication2);
-
-                // Authentication authentication2 = new
-                // UsernamePasswordAuthenticationToken("anonymous",
-                // "anonymous", AuthorityUtils.createAuthorityList("anonymous"));
-                // SecurityContextHolder.getContext().setAuthentication(authentication2);
             }
         }
 
