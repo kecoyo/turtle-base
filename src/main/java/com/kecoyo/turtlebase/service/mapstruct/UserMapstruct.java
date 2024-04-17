@@ -19,7 +19,6 @@ public interface UserMapstruct {
             @Mapping(target = "phone", source = "user.phone"),
             @Mapping(target = "gender", source = "user.gender"),
             @Mapping(target = "email", source = "user.email"),
-            @Mapping(target = "remark", source = "user.remark"),
     })
     LoginUserDto toLoginUserDto(JwtUserDto userDetails);
 }

@@ -1,12 +1,17 @@
 package com.kecoyo.turtlebase.common.security;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.kecoyo.turtlebase.model.User;
+import com.kecoyo.turtlebase.service.RoleService;
 import com.kecoyo.turtlebase.service.UserService;
 
 @Service("userDetailsService")
@@ -18,6 +23,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private RoleService roleService;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         JwtUserDto jwtUserDto = userCacheManager.getUserCache(username);
@@ -27,7 +35,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
                 throw new UsernameNotFoundException("用户不存在");
             }
 
-            jwtUserDto = new JwtUserDto(user, null, null);
+            List<GrantedAuthority> authorities = roleService.list().stream()
+                    .map(role -> new AuthorityDto(role.getName())).collect(Collectors.toList());
+
+            jwtUserDto = new JwtUserDto(user, null, authorities);
 
             // 添加缓存数据
             userCacheManager.addUserCache(username, jwtUserDto);

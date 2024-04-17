@@ -17,7 +17,7 @@ spring:
     time-zone: GMT+8
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/turtle_open?useSSL=false&useUnicode=true&characterEncoding=UTF-8
+    url: jdbc:mysql://localhost:3306/turtle-base?useSSL=false&useUnicode=true&characterEncoding=UTF-8
     username: root
     password: 123456
   data:
