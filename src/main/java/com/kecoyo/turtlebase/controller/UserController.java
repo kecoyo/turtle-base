@@ -3,14 +3,13 @@ package com.kecoyo.turtlebase.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.kecoyo.turtlebase.common.security.AnonymousAccess;
 import com.kecoyo.turtlebase.common.web.ResponseResult;
 import com.kecoyo.turtlebase.dto.LoginUserDto;
 import com.kecoyo.turtlebase.dto.UserLoginDto;
@@ -32,6 +31,7 @@ public class UserController {
 
     @Operation(summary = "用户登录")
     @PostMapping("/login")
+    @AnonymousAccess
     public ResponseResult<LoginUserDto> login(@Valid @RequestBody UserLoginDto dto, HttpServletRequest request) {
         LoginUserDto result = userService.login(dto.getUsername(), dto.getPassword(), request);
         return ResponseResult.success(result);
@@ -48,8 +48,7 @@ public class UserController {
 
     @Operation(summary = "查询用户")
     @GetMapping("/list")
-    // @Secured("ROLE_ADMIN")
-    // @Anonymous
+    @AnonymousAccess
     public ResponseResult<List<User>> list() {
         List<User> list = userService.list();
         return ResponseResult.success(list);
