@@ -33,14 +33,16 @@ public class RedisConfig {
         RedisTemplate<String, Object> template = new RedisTemplate<>();
 
         // 序列化
-        StringRedisSerializer stringRedisSerializer = new StringRedisSerializer();
-        GenericFastJsonRedisSerializer jsonRedisSerializer = new GenericFastJsonRedisSerializer();
+        StringRedisSerializer keySerializer = new StringRedisSerializer();
+        GenericFastJsonRedisSerializer valueSerializer = new GenericFastJsonRedisSerializer();
+        // GenericJackson2JsonRedisSerializer valueSerializer = new
+        // GenericJackson2JsonRedisSerializer();
 
         template.setConnectionFactory(factory);
-        template.setKeySerializer(stringRedisSerializer);
-        template.setValueSerializer(jsonRedisSerializer);
-        template.setHashKeySerializer(stringRedisSerializer);
-        template.setHashValueSerializer(jsonRedisSerializer);
+        template.setKeySerializer(keySerializer);
+        template.setValueSerializer(valueSerializer);
+        template.setHashKeySerializer(keySerializer);
+        template.setHashValueSerializer(valueSerializer);
         return template;
     }
 
@@ -50,8 +52,12 @@ public class RedisConfig {
      */
     @Bean
     public RedisCacheConfiguration redisCacheConfiguration() {
+        // 设置@Cacheable 序列化方式
         RedisSerializer<String> keySerializer = new StringRedisSerializer();
         GenericFastJsonRedisSerializer valueSerializer = new GenericFastJsonRedisSerializer();
+        // GenericJackson2JsonRedisSerializer valueSerializer = new
+        // GenericJackson2JsonRedisSerializer();
+
         RedisCacheConfiguration configuration = RedisCacheConfiguration.defaultCacheConfig();
         configuration = configuration.entryTtl(Duration.ofHours(2))
                 .serializeKeysWith(RedisSerializationContext.SerializationPair.fromSerializer(keySerializer))
