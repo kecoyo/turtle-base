@@ -4,8 +4,10 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.kecoyo</groupId>
-    <artifactId>turtle-base</artifactId>
+    <artifactId>turtle-service</artifactId>
     <version>0.0.1</version>
+    <name>turtle-service</name>
+    <description>turtle-service</description>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
